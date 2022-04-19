@@ -46,10 +46,10 @@ public class AuthenticationFilter {
         //Let's set the JWT Claims
         JwtBuilder builder = Jwts.builder().setId(id)
             .setIssuedAt(now)
-            .setSubject(email)
-            .setIssuer(username)
-                .claim("Tag", tag)
-                .claim("Role", role)
+                .claim("email", email)
+                .claim("username", username)
+                .claim("tag", tag)
+                .claim("role", role)
             .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(1).toInstant()))
             .signWith(signatureAlgorithm, signingKey);
 
