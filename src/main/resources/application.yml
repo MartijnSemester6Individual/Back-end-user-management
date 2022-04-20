@@ -5,7 +5,7 @@ spring:
         converters:
             preferred-json-mapper: gson
     application:
-        name: AuthenticationAPI
+        name: AUTHENTICATIONAPI
     jpa:
         database: mysql
         hibernate:
