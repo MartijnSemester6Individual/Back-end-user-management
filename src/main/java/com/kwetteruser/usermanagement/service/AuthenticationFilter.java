@@ -29,7 +29,7 @@ public class AuthenticationFilter {
     }
 
     // TODO don't hard code SECRET_KEY
-    private static final String SECRET_KEY = "oeRaYY";
+    private static final String SECRET_KEY = "afskljsfkldjfalijsfkjsflksdjioer324898234mn";
 
     public String createJWT(String id, String email, String username, String tag, Roles role, long ttlMillis) {
 

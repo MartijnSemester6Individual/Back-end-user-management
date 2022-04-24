@@ -30,7 +30,7 @@ import java.util.StringTokenizer;
  * @class AuthController
  */
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("auth")
 public class AuthController {
 
     @Autowired
