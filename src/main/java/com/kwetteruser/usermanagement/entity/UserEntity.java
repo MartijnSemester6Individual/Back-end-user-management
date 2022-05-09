@@ -1,88 +1,50 @@
 package com.kwetteruser.usermanagement.entity;
 
-import javax.persistence.*;
+import com.kwetteruser.usermanagement.enumerators.Roles;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.springframework.lang.NonNull;
 
+import javax.persistence.*;
+import java.util.UUID;
+
+@Setter
+@Getter
 @Entity
 @Table(name = "users")
 public class UserEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    private String firstName;
-    private String lastName;
-    private String emailId;
-    private String bio;
-    private String website;
-    private String location;
+    @Column(name="id", nullable = false, unique = true)
+    @Type(type = "uuid-char")
+    private UUID id = UUID.randomUUID();
 
-    public UserEntity(long id, String firstName, String lastName, String emailId, String bio, String website, String location) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.bio = bio;
-        this.website = website;
-        this.location = location;
-    }
+    @Column(nullable = false, unique = true)
+    @NonNull
+    public String username;
 
-    public UserEntity() {
+    @Column(nullable = false, unique = true)
+    @NonNull
+    public String tag;
 
-    }
+    @Column(unique = true)
+    public String email;
 
-    public String getEmailId() {
-        return emailId;
-    }
+    @Column()
+    public String bio;
 
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
+    @Column()
+    public String website;
 
-    public String getLastName() {
-        return lastName;
-    }
+    @Column()
+    public String location;
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    @Column()
+    public Roles role;
 
-    public String getFirstName() {
-        return firstName;
-    }
+    @Column(nullable = false)
+    public String password;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getBio() {
-        return bio;
-    }
-
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
 }

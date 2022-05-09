@@ -1,54 +1,42 @@
 package com.kwetteruser.usermanagement.controller;
 
-import com.kwetteruser.usermanagement.model.User;
-import com.kwetteruser.usermanagement.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/")
 public class UserController {
 
-    private UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
-    @PostMapping("/user")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
-    }
-
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
-
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> GetUserById(@PathVariable("id") Long id) {
-        User user = null;
-        user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
-    }
-
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        deleted = userService.deleteUser(id);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
-    }
-
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
-                                           @RequestBody User user) {
-        user = userService.updateUser(id, user);
-        return ResponseEntity.ok(user);
-    }
+//    private UserService userService;
+//
+//    public UserController(UserService userService) {
+//        this.userService = userService;
+//    }
+//
+//    @GetMapping("/users")
+//    public List<UserEntity> getAllUsers() {
+//        return userService.getAllUsers();
+//    }
+//
+//    @GetMapping("/users/{id}")
+//    public ResponseEntity<UserEntity> GetUserById(@PathVariable("id") UUID id) {
+//        UserEntity user = null;
+//        user = userService.findById(id);
+//        return ResponseEntity.ok(user);
+//    }
+//
+//    @DeleteMapping("/users/{id}")
+//    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable("id") UUID id) {
+//        boolean deleted = false;
+//        deleted = userService.deleteUser(id);
+//        Map<String, Boolean> response = new HashMap<>();
+//        response.put("deleted", deleted);
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @PutMapping("/users/{id}")
+//    public ResponseEntity<UserEntity> updateUser(@PathVariable("id") UUID id,
+//                                           @RequestBody UserEntity user) {
+//        user = userService.updateUser(id, user);
+//        return ResponseEntity.ok(user);
+//    }
 }
