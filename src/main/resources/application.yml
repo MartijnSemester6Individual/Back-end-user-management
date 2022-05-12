@@ -11,9 +11,9 @@ spring:
         hibernate:
             ddl-auto: update
     datasource:
-        url: "jdbc:mysql://localhost:3306/users"
-        username: "root"
-        password: "root"
+        url: "jdbc:mysql://kbp7pqomca4c.eu-central-2.psdb.cloud/kwetter?sslMode=VERIFY_IDENTITY"
+        username: "i0ztusobkany"
+        password: "pscale_pw_4ityE8og2X-lj58FwFJfuGCd7UEC1MMP7E32Lhec80Q"
 eureka:
     client:
         serviceUrl:
