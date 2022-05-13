@@ -27,6 +27,8 @@ public class UserInfoDto {
     @Getter @Setter
     private Roles role;
     @Getter @Setter
+    private String password;
+    @Getter @Setter
     private String tag;
     @Getter @Setter
     private String bio;

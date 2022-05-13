@@ -1,27 +1,19 @@
 server:
     port: 8081
 spring:
-    datasource:
-        url: jdbc:h2:mem:virtual
-        username: root
-        password: root
-        driverClassName: org.h2.Driver
-    #    datasource:
-    #        url: "jdbc:mysql://kbp7pqomca4c.eu-central-2.psdb.cloud/kwetter?sslMode=VERIFY_IDENTITY"
-    #        username: "i0ztusobkany"
-    #        password: "pscale_pw_4ityE8og2X-lj58FwFJfuGCd7UEC1MMP7E32Lhec80Q"
-    jpa:
-        spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-        generate-ddl: true
-        hibernate:
-            ddl-auto: update
+    mvc:
+        converters:
+            preferred-json-mapper: gson
     application:
         name: AUTHENTICATIONAPI
-    h2:
-        console.enabled: true
-        console.path: /h2-console
-        console.settings.trace: false
-        spring.h2.console.settings.web-allow-others: false
+    jpa:
+        database: mysql
+        hibernate:
+            ddl-auto: update
+    datasource:
+        url: "jdbc:mysql://localhost:3306/users"
+        username: "root"
+        password:
 eureka:
     client:
         serviceUrl:
