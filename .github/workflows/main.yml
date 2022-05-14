@@ -10,8 +10,25 @@ on:
     branches: [ main, development ]
 
 jobs:
-  build:
 
+  create-envfile:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: create .env file
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_DEBUG: false
+        envkey_SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+        envkey_SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+        envkey_SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+        envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        directory: ../../../
+        file_name: .env
+        fail_on_empty: false
+
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,9 +45,6 @@ jobs:
         path: ~/.m2
         key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
         restore-keys: ${{ runner.os }}-m2
-    - name: Load secrets from .env file
-      env:
-        PROD_ENV_FILE: ${{ secrets.USER_SECRETS }}
   linting: 
     runs-on: ubuntu-latest
     needs: [build]
