@@ -1,5 +1,6 @@
 package com.kwetteruser.usermanagement.service;
 import com.kwetteruser.usermanagement.enumerators.Roles;
+import io.github.cdimascio.dotenv.Dotenv;
 import io.jsonwebtoken.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,8 @@ import java.time.ZonedDateTime;
 
 @Component
 public class AuthenticationFilter {
+
+    Dotenv dotenv = Dotenv.load();
 
     public static String getBcryptHash(String password) throws NoSuchAlgorithmException {
         PasswordEncoder passwordEncoder = getPasswordEncoder();
@@ -29,7 +32,7 @@ public class AuthenticationFilter {
     }
 
     // TODO don't hard code SECRET_KEY
-    private static final String SECRET_KEY = "afskljsfkldjfalijsfkjsflksdjioer324898234mn";
+    private final String SECRET_KEY = dotenv.get("SECRET_KEY");
 
     public String createJWT(String id, String email, String username, String tag, Roles role, long ttlMillis) {
 
