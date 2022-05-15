@@ -31,7 +31,6 @@ public class AuthenticationFilter {
         return isMatched;
     }
 
-    // TODO don't hard code SECRET_KEY
     private final String SECRET_KEY = dotenv.get("SECRET_KEY");
 
     public String createJWT(String id, String email, String username, String tag, Roles role, long ttlMillis) {
