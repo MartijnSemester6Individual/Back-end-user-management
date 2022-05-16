@@ -1,16 +1,16 @@
 ##Default application.yml file, always loads this
 server:
-    port: 8084
+  port: 8084
 spring:
-    spring:
-        profiles:
-            include: default
-    mvc:
-        converters:
-            preferred-json-mapper: gson
-    application:
-        name: AUTHENTICATIONAPI
+  spring:
+    profiles:
+      include: default
+  mvc:
+    converters:
+      preferred-json-mapper: gson
+  application:
+    name: AUTHENTICATIONAPI
 eureka:
-    client:
-        serviceUrl:
-            defaultZone: http://localhost:8083/eureka
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8083/eureka
