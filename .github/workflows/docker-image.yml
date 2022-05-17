@@ -1,0 +1,43 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs: 
+
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+    -
+      name: Checkout code
+      uses: actions/checkout@v2
+    - 
+      name: create .env file
+      run: |
+        touch .env
+        echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+        echo SPRING_DATASOURCE_PASSWORD=${{ secrets.SPRING_DATASOURCE_PASSWORD }} >> .env
+        echo SPRING_DATASOURCE_USERNAMED=${{ secrets.SPRING_DATASOURCE_USERNAME }} >> .env
+        echo SPRING_DATASOURCE_URL=${{ secrets.SPRING_DATASOURCE_URL }} >> .env
+        cat .env
+      env: 
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        SPRING_DATASOURCE_USERNAME: ${{ secrets.SPRING_DATASOURCE_USERNAME }}
+        SPRING_DATASOURCE_PASSWORD: ${{ secrets.SPRING_DATASOURCE_PASSWORD }}
+        SPRING_DATASOURCE_URL: ${{ secrets.SPRING_DATASOURCE_URL }}
+    - 
+      name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - 
+      name: Build and push to Docker Hub
+      uses: docker/build-push-action@v3
+      with: 
+          context: .
+          push: true
+          tags: martijnbassa/kwetter-user-management-service:latest
