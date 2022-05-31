@@ -12,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,14 +45,15 @@ public class UserController {
 //        return ResponseEntity.ok(user);
 //    }
 //
-//    @DeleteMapping("/users/{id}")
-//    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable("id") UUID id) {
-//        boolean deleted = false;
-//        deleted = userService.deleteUser(id);
-//        Map<String, Boolean> response = new HashMap<>();
-//        response.put("deleted", deleted);
-//        return ResponseEntity.ok(response);
-//    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
+        UUID userId = UUID.fromString(id);
+        if(!userService.findById(userId).isPresent()) {
+            return new ResponseEntity<>("No such user", HttpStatus.NOT_FOUND);
+        }
+        userService.deleteById(userId);
+        return new ResponseEntity<>("User successfully deleted", HttpStatus.OK);
+    }
 //
 //    @PutMapping("/users/{id}")
 //    public ResponseEntity<UserEntity> updateUser(@PathVariable("id") UUID id,
