@@ -9,7 +9,7 @@ spring:
     converters:
       preferred-json-mapper: gson
   application:
-    name: AUTHENTICATIONAPI
+    name: user-management
 eureka:
   client:
     serviceUrl:
