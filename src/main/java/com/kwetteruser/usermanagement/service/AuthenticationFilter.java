@@ -54,7 +54,7 @@ public class AuthenticationFilter {
                 .claim("username", username)
                 .claim("tag", tag)
                 .claim("role", role)
-            .setExpiration(Date.from(ZonedDateTime.now().plusMinutes(1).toInstant()))
+            .setExpiration(Date.from(ZonedDateTime.now().plusDays(30).toInstant()))
             .signWith(signatureAlgorithm, signingKey);
 
         //Builds the JWT and serializes it to a compact, URL-safe string
