@@ -15,7 +15,6 @@ public class RabbitMQSender {
     @Value("${rabbitmq.exchange}")
     private String exchange;
 
-
     public void send(JSONObject message, String routingkey) {
         rabbitTemplate.convertAndSend(exchange, routingkey, message);
         System.out.println("Send msg = " + message);
