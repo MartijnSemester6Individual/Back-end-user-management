@@ -48,9 +48,12 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         UUID userId = UUID.fromString(id);
+        JSONObject deletedUser = new JSONObject();
         if(!userService.findById(userId).isPresent()) {
             return new ResponseEntity<>("No such user", HttpStatus.NOT_FOUND);
         }
+        deletedUser.put("id", id);
+        rabbitMQSender.send(deletedUser, "deleteUserKey");
         userService.deleteById(userId);
         return new ResponseEntity<>("User successfully deleted", HttpStatus.OK);
     }
@@ -72,7 +75,7 @@ public class UserController {
                 updated.tag = (userInfoDto.getTag() == null) ? updated.tag : userInfoDto.getTag();
                 updatedUser.put("id", id);
                 updatedUser.put("tag", updated.tag);
-                rabbitMQSender.send(updatedUser);
+                rabbitMQSender.send(updatedUser, "testkey");
                 return new ResponseEntity<>(userService.save(updated), HttpStatus.OK);
             } else {
                 return ResponseEntity.badRequest()

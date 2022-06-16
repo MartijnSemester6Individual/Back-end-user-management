@@ -15,15 +15,26 @@ public class RabbitMQConfig {
     @Value("${rabbitmq.queue}")
     String queueName;
 
+    @Value("deleteUserQueue")
+    String deleteUserQueue;
+
     @Value("${rabbitmq.exchange}")
     String exchange;
 
     @Value("${rabbitmq.routingkey}")
     private String routingkey;
 
+    @Value("deleteUserKey")
+    private String deleteUserKey;
+
     @Bean
     Queue queue() {
         return new Queue(queueName, false);
+    }
+
+    @Bean
+    Queue queue2() {
+        return new Queue(deleteUserQueue, false);
     }
 
     @Bean
@@ -34,6 +45,11 @@ public class RabbitMQConfig {
     @Bean
     Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(routingkey);
+    }
+
+    @Bean
+    Binding binding2(Queue queue2, DirectExchange exchange) {
+        return BindingBuilder.bind(queue2).to(exchange).with(deleteUserKey);
     }
 
     @Bean
